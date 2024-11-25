@@ -2,47 +2,43 @@ const diceRoll = () => {
   return (Math.floor(Math.random()*6)+1)
 }
 
-let dice = [0,0,0,0,0,0]
-let hold = [false,false,false,false,false,false]
-
 //Roll
 const roll = () => {
-for (let i = 0; i < dice.length; i++){
-  dice[i] = diceRoll()
+  let rollArr = [0,0,0,0,0,0]
+for (let i = 0; i < rollArr.length; i++){
+  rollArr[i] = diceRoll()
 }
-return dice;
+return rollArr;
 }
+
+let hold = []
+let diceArray = roll()
 
 //merge rolls into One New Array
 let mergeRoll = (holdArray) => {
-let oldDie = dice
-let newDie = roll()
-let finalRoll = []
+  let oldDie = diceArray
+  let newDie = roll()
+  let finalRoll = []
 
-console.log('Old Roll: ' + oldDie)
-console.log('New Roll: ' + newDie)
+  console.log('Old Roll: ' + oldDie)
+  console.log('New Roll: ' + newDie)
 
-for (let m = 0; m < holdArray.length; m++) {
-  if (holdArray[m] == true) {
-    finalRoll.push(dice[m])
+  for (let m = 0; m < holdArray.length; m++) {
+    if (holdArray[m] == true) {
+      finalRoll.push(diceArray[m])
+    }
+    else {
+      finalRoll.push(newDie[m])
+    }
   }
-  else {
-    finalRoll.push(newDie[m])
-  }
-}
-return finalRoll;
+  return finalRoll;
 }
 
 // roll() / mergeRoll(hold) / dice / hold [true, false]
 
-dice = roll()
-console.log('Dice: ' + dice)
-hold = [false, true, true, false, false, true]
+console.log('Dice: ' + diceArray)
+hold = [true, true, true, true, true, false]
 console.log(hold)
-console.log(mergeRoll(hold))
-
-
-
-
+console.log(mergeRoll(hold, diceArray))
 
 
