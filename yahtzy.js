@@ -1,8 +1,9 @@
+//Randomizer for roll
 const diceRoll = () => {
   return (Math.floor(Math.random()*6)+1)
 }
 
-//Roll
+//Roll A New Set of Dice
 const roll = () => {
   let rollArr = [0,0,0,0,0,0]
 for (let i = 0; i < rollArr.length; i++){
@@ -11,10 +12,11 @@ for (let i = 0; i < rollArr.length; i++){
 return rollArr;
 }
 
+//Initializing Array Variables
 let hold = []
 let diceArray = roll()
 
-//merge rolls into One New Array
+//Merge Old and New Rolls into Final Roll
 let mergeRoll = (holdArray) => {
   let oldDie = diceArray
   let newDie = roll()
@@ -34,7 +36,8 @@ let mergeRoll = (holdArray) => {
   return finalRoll;
 }
 
-// roll() / mergeRoll(hold) / dice / hold [true, false]
+// Test Area
+//NOTES: Function Syntax - roll() / mergeRoll(hold) / dice / hold [true, false]
 
 console.log('Dice: ' + diceArray)
 hold = [true, true, true, true, true, false]
