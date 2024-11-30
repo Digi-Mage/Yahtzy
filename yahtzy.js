@@ -39,9 +39,26 @@ let mergeRoll = (holdArray) => {
 // Test Area
 //NOTES: Function Syntax - roll() / mergeRoll(hold) / dice / hold [true, false]
 
-console.log('Dice: ' + diceArray)
-hold = [true, true, true, true, true, false]
-console.log(hold)
-console.log(mergeRoll(hold, diceArray))
+//console.log('Dice: ' + diceArray)
+//hold = [true, true, true, true, true, false]
+//console.log(hold)
+//console.log(mergeRoll(hold, diceArray))
 
+//ScoreSheet
+
+let ones = 0
+let twos = 0
+let threes = 0
+let fours = 0
+let fives = 0
+let sixes = 0
+
+let threeOfAKind = 0
+let fourOfAKind = 0
+let fullHouse = false
+let smallStraight = false
+let largeStraight = false
+let yahtzy = 0
+let chance = 0
+let yahtzyBonus = 0
 
