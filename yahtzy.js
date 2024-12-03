@@ -52,12 +52,13 @@ let threes = 0
 let fours = 0
 let fives = 0
 let sixes = 0
+let ThirtyFiveBonus = 0
 
 let threeOfAKind = 0
 let fourOfAKind = 0
-let fullHouse = false
-let smallStraight = false
-let largeStraight = false
+let fullHouse = 0
+let smallStraight = 0
+let largeStraight = 0
 let yahtzy = 0
 let chance = 0
 let yahtzyBonus = 0
@@ -112,7 +113,7 @@ const calcThreeOfAKind = (arr) => {
   else {
     points = 0
   }
-  return points;
+  threeOfAKind = points;
 }
 
 const calcFourOfAKind = (arr) => {
@@ -152,7 +153,7 @@ const calcFourOfAKind = (arr) => {
   else {
     points = 0
   }
-  return points;
+  fourOfAKind = points;
 }
 
 const calcFullHouse = (arr) => {
@@ -239,23 +240,70 @@ const calcFullHouse = (arr) => {
       }
     }
     if (ones >=2) {
-      fullHouse = true;
+      fullHouse = 25;
       }
     else if (twos >= 2) {
-      fullHouse = true;
+      fullHouse = 25;
     }
     else if (threes >= 2) {
-      fullHouse = true;
+      fullHouse = 25;
     }
     else if (fours >= 2) {
-      fullHouse = true;
+      fullHouse = 25;
     }
     else if (fives >= 2) {
-      fullHouse = true;
+      fullHouse = 25;
     }
     else if (sixes >= 2) {
-      fullHouse = true;
+      fullHouse = 25;
     }
 }
-calcFullHouse([6,4,4,5,3,5])
-console.log(fullHouse)
+
+//_____________________Test area
+//calcFullHouse([4,1,3,3,1,4])
+//console.log(fullHouse)
+
+//calcFourOfAKind([4,4,4,4,3,5])
+//calcThreeOfAKind([4,4,4,5,3,5])
+//console.log(fourOfAKind)
+//console.log(threeOfAKind)
+
+const calcSmStraight = (arr) => {
+  let temp = [...arr];
+  temp.sort()
+  const setOne = new Set();
+  const setTwo = new Set();
+  const setThree = new Set();
+  //Adding Values to sets to test for duplicate numbers, invalidates straight possibility if shorter than 4
+  setOne.add(temp[0])
+  setOne.add(temp[1])
+  setOne.add(temp[2])
+  setOne.add(temp[3])
+
+  setTwo.add(temp[1])
+  setTwo.add(temp[2])
+  setTwo.add(temp[3])
+  setTwo.add(temp[4])
+
+  setThree.add(temp[2])
+  setThree.add(temp[3])
+  setThree.add(temp[4])
+  setThree.add(temp[5])
+
+  if (setOne.size == 4 || setTwo.size == 4 || setThree.size == 4) {
+    testOne = (temp[3] - temp[0])
+    testTwo = (temp[4] - [temp[1]])
+    testThree = (temp[5] - [temp[2]])
+    if (testOne >= 3 || testTwo >= 3 || testThree >=3) {
+      smallStraight = 30
+    }
+  }
+}
+
+//___________________________TEST AREA
+
+
+//console.log(smallStraight)
+//let testArr = [3,2,2,4,5,6]
+//calcSmStraight(testArr)
+//console.log(smallStraight)
