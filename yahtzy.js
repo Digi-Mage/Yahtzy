@@ -36,14 +36,6 @@ let mergeRoll = (holdArray) => {
   return finalRoll;
 }
 
-// Test Area
-//NOTES: Function Syntax - roll() / mergeRoll(hold) / dice / hold [true, false]
-
-//console.log('Dice: ' + diceArray)
-//hold = [true, true, true, true, true, false]
-//console.log(hold)
-//console.log(mergeRoll(hold, diceArray))
-
 //ScoreSheet
 
 let ones = 0
@@ -52,7 +44,7 @@ let threes = 0
 let fours = 0
 let fives = 0
 let sixes = 0
-let ThirtyFiveBonus = 0
+let thirtyFiveBonus = 0
 
 let threeOfAKind = 0
 let fourOfAKind = 0
@@ -61,10 +53,20 @@ let smallStraight = 0
 let largeStraight = 0
 let yahtzy = 0
 let chance = 0
-let yahtzyBonus = 0
 
-// Can be used to calculate 1,2,3,4,5,6 on Sheet, Entered as calcNumberedDice([dice array], number on sheet)
-const calcNumberedDice = (arr, valueSearchingFor) => {
+//35 Bonus only works if called with syntax same as others
+const calcThirtyFiveBonus = () => {
+  let test = (ones + twos + threes +fours + fives + sixes)
+  if (test >= 63) {
+    return 35;
+  }
+  else {
+    return 0
+  }
+}
+
+// This function runs calculation for calcNumberedDice so that 35 Bonus can be checked after points are returned
+const holdFuncCalcNumDice = (arr, valueSearchingFor) => {
   let points = 0
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] === valueSearchingFor) {
@@ -73,10 +75,22 @@ const calcNumberedDice = (arr, valueSearchingFor) => {
   }
   return points;
 }
+// Can be used to calculate 1,2,3,4,5,6 on Sheet, Entered as calcNumberedDice([dice array], number on sheet)
+const calcNumberedDice = (arr, valueSearchingFor) => {
+  if (yahtzy == 50) {
+    return 100;
+  }
+  let points = holdFuncCalcNumDice(arr, valueSearchingFor)
+  thirtyFiveBonus = calcThirtyFiveBonus()
+  return points;
+}
 
-// More specialized Scoresheet calculators
+// More Specialized Scoresheet Calculators
 
 const calcThreeOfAKind = (arr) => {
+  if (yahtzy == 50) {
+    return 100;
+  }
   let ones = 0
   let twos = 0
   let threes = 0
@@ -113,10 +127,13 @@ const calcThreeOfAKind = (arr) => {
   else {
     points = 0
   }
-  threeOfAKind = points;
+  return points;
 }
 
 const calcFourOfAKind = (arr) => {
+  if (yahtzy == 50) {
+    return 100;
+  }
   let ones = 0
   let twos = 0
   let threes = 0
@@ -153,10 +170,14 @@ const calcFourOfAKind = (arr) => {
   else {
     points = 0
   }
-  fourOfAKind = points;
+  return points;
 }
 
 const calcFullHouse = (arr) => {
+  if (yahtzy == 50) {
+    return 100;
+  }
+    let points = 0
     let ones = 0
     let twos = 0
     let threes = 0
@@ -240,70 +261,99 @@ const calcFullHouse = (arr) => {
       }
     }
     if (ones >=2) {
-      fullHouse = 25;
+      points = 25;
       }
     else if (twos >= 2) {
-      fullHouse = 25;
+      points = 25;
     }
     else if (threes >= 2) {
-      fullHouse = 25;
+      points = 25;
     }
     else if (fours >= 2) {
-      fullHouse = 25;
+      points = 25;
     }
     else if (fives >= 2) {
-      fullHouse = 25;
+      points = 25;
     }
     else if (sixes >= 2) {
-      fullHouse = 25;
+      points = 25;
     }
+  return points;
 }
 
-//_____________________Test area
-//calcFullHouse([4,1,3,3,1,4])
-//console.log(fullHouse)
-
-//calcFourOfAKind([4,4,4,4,3,5])
-//calcThreeOfAKind([4,4,4,5,3,5])
-//console.log(fourOfAKind)
-//console.log(threeOfAKind)
-
 const calcSmStraight = (arr) => {
+  if (yahtzy == 50) {
+    return 100;
+  }
+  let points = 0
   let temp = [...arr];
   temp.sort()
   const setOne = new Set();
-  const setTwo = new Set();
-  const setThree = new Set();
+
   //Adding Values to sets to test for duplicate numbers, invalidates straight possibility if shorter than 4
-  setOne.add(temp[0])
-  setOne.add(temp[1])
-  setOne.add(temp[2])
-  setOne.add(temp[3])
+  
+  for (i = 0; i < temp.length; i++) {
+    setOne.add(temp[i]);
+  }
 
-  setTwo.add(temp[1])
-  setTwo.add(temp[2])
-  setTwo.add(temp[3])
-  setTwo.add(temp[4])
+  if (setOne.size >= 4) {
+      temp = Array.from(setOne)
+      tempStr = temp.toString()
 
-  setThree.add(temp[2])
-  setThree.add(temp[3])
-  setThree.add(temp[4])
-  setThree.add(temp[5])
-
-  if (setOne.size == 4 || setTwo.size == 4 || setThree.size == 4) {
-    testOne = (temp[3] - temp[0])
-    testTwo = (temp[4] - [temp[1]])
-    testThree = (temp[5] - [temp[2]])
-    if (testOne >= 3 || testTwo >= 3 || testThree >=3) {
-      smallStraight = 30
+    if (tempStr.includes('1,2,3,4') || tempStr.includes('2,3,4,5') || tempStr.includes('3,4,5,6')) {
+      points = 30
     }
+  }
+  return points;
+}
+
+const calcLgStraight = (arr) => {
+  if (yahtzy == 50) {
+    return 100;
+  }
+  let points = 0
+  let temp = [...arr];
+  temp.sort()
+  const setOne = new Set();
+
+  //Adding Values to sets to test for duplicate numbers, invalidates straight possibility if shorter than 5
+  
+  for (i = 0; i < temp.length; i++) {
+    setOne.add(temp[i]);
+  }
+
+  if (setOne.size >= 5) {
+    temp = Array.from(setOne)
+    tempStr = temp.toString()
+
+  if (tempStr.includes('1,2,3,4,5') || tempStr.includes('2,3,4,5,6')) {
+    points = 40
+  }
+  }
+  return points;
+}
+
+const calcYahtzy = (arr) => {
+  const newSet = new Set();
+
+  for (const a of arr) {
+    newSet.add(arr[a]);
+  }
+  console.log(newSet)
+  if (newSet.size == 1) {
+    return 50;
+  }
+  else {
+    return 0;
   }
 }
 
-//___________________________TEST AREA
+const calcChance = (arr) => {
+  if (yahtzy == 50) {
+    return 100;
+  }
+  const points = arr.reduce((accumulator, currentValue) => accumulator + currentValue);
+  return points
+}
 
-
-//console.log(smallStraight)
-//let testArr = [3,2,2,4,5,6]
-//calcSmStraight(testArr)
-//console.log(smallStraight)
+//________________________________TEST AREA: 35 Bonus only works if called with syntax same as others
