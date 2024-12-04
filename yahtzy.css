@@ -1,0 +1,12 @@
+* {
+    background-color: blueviolet;
+    color:aliceblue;
+}
+
+button:hover {
+    background-color: rgb(167, 104, 226);
+}
+
+ul {
+    list-style: none;
+}

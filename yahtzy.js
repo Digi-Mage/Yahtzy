@@ -65,23 +65,17 @@ const calcThirtyFiveBonus = () => {
   }
 }
 
-// This function runs calculation for calcNumberedDice so that 35 Bonus can be checked after points are returned
-const holdFuncCalcNumDice = (arr, valueSearchingFor) => {
+// Can be used to calculate 1,2,3,4,5,6 on Sheet, Entered as calcNumberedDice([dice array], number on sheet)
+const calcNumberedDice = (arr, valueSearchingFor) => {
+  if (yahtzy == 50) {
+    return 100;
+  }
   let points = 0
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] === valueSearchingFor) {
       points += valueSearchingFor
     }
   }
-  return points;
-}
-// Can be used to calculate 1,2,3,4,5,6 on Sheet, Entered as calcNumberedDice([dice array], number on sheet)
-const calcNumberedDice = (arr, valueSearchingFor) => {
-  if (yahtzy == 50) {
-    return 100;
-  }
-  let points = holdFuncCalcNumDice(arr, valueSearchingFor)
-  thirtyFiveBonus = calcThirtyFiveBonus()
   return points;
 }
 
@@ -355,5 +349,3 @@ const calcChance = (arr) => {
   const points = arr.reduce((accumulator, currentValue) => accumulator + currentValue);
   return points
 }
-
-//________________________________TEST AREA: 35 Bonus only works if called with syntax same as others
