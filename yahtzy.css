@@ -1,12 +1,234 @@
 * {
-    background-color: blueviolet;
-    color:aliceblue;
+    box-sizing:border-box;
+}
+
+
+/*_)_)_)_)_)_)_)_)_)_)_)_)_)_)_)_)_)__)_)_)_)_)_)_)_)_)_)_)_)_)_)_)New Code*/
+
+th {
+    font-weight: bolder;
+    padding: 15px;
+    border-style: solid;
+    border-color: black;
+    margin: 0;
+}
+
+td {
+    padding: 15px;
+    border-style: solid;
+    border-color: black;
+    margin: 0;
+}
+
+.app-window {
+    background-color:black;
+    border-radius: 10px;
+    width:100%;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+}
+
+.yahtzy-score {
+    color:#230042;
+    margin:10px;
+    padding:10px;
+    border-radius: 10px;
+    outline: #230042;
+    padding: 15px;
+    border-style: solid;
+    border-color: black;
+    margin: 0;
+    display:flex;
+    justify-content:flex-start;
+}
+
+.yahtzy-score-button {
+        display:block; 
+        font-size: 20px;
+        color: #f5eefe;
+        border: 0px solid black;
+        background-color: #482158;
+        border-radius: 10px;
+        padding: 6px;
+        box-shadow:none;
+}
+
+.yahtzy-score-name {
+    padding: 15px;
+    border-style: solid;
+    border-color: black;
+    margin: 0;
+}
+
+.yahtzy-score-how-to {
+    padding: 15px;
+    border-style: solid;
+    border-color: black;
+    margin: 0;
+}
+
+.yahtzy-dice {
+    width:100px;
+    height:100px;
+    background-color: #f5eefe;
+    margin:10px;
+    margin-top:20px;
+    margin-left:30px;
+    border-radius:10px;
+}
+
+#yahtzy-upper-section {
+    border-collapse: collapse;
+    width:100%;
+    background-color: #f5eefe;
+}
+
+#yahtzy-lower-section {
+    border-collapse: collapse;
+    width:100%;
+    margin-left:45px;
+    background-color: #f5eefe;
+}
+
+#yahtzy-roll-button {
+    padding-left: 33px;
+    padding-right:33px;
+    margin-top:20px;
+    margin-left:30px;
+}
+/*_)_)_)_)_)_)_)_)_)_)_)_)_)_)_)_)_)__)_)_)_)_)_)_)_)_)_)_)_)_)_)_)New Code*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*v All Pages Applicable Styles v*/
+
+/*Direct Element Styles*/
+
+li, h1, h2, h3, h4, h5, p {
+    color:#482158;
+}
+
+li {
+    list-style-type:none;
+}
+
+h1 {
+    background-color:#5c1f58;
+    border-radius:10px;
+    padding:5px 15px;
+    position:relative;
+    left:35px;
+    color:#f5eefe;
+}
+
+h2 {
+    color:#f5eefe;
+    background-color:#5c1f58;
+    border-radius:10px;
+    padding:5px 15px;
+}
+
+h3 {
+    margin-left:20px;
+}
+
+h4 {
+    align-self:flex-start;
+    margin-top:15px;
+    margin-bottom:5px;
+    position:relative;
+    left:10px;
+}
+
+body {
+    background-color: #230042;
+    font-family: "Lucinda", sans-serif;
+}
+
+/*Classes*/
+
+
+
+
+/*ID's*/
+
+
+/*^ All Pages Applicable Styles ^*/
+/*v Project Pages Applicable Styles v*/
+
+/*Direct Element Styles*/
+
+button {
+    display:block; 
+    margin: 0 auto;
+    font-size: 20px;
+    color: #f5eefe;
+    border: 0px solid #f5eefe;
+    background-color: #5c1f58;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 5px 5px #230042;
 }
 
 button:hover {
-    background-color: rgb(167, 104, 226);
+    opacity: 70%;
 }
 
-ul {
-    list-style: none;
+/*Classes*/
+
+.project-main {
+    background-color: #f5eefe;
+    margin:10px;
+    border-radius: 10px;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content:flex-start;
+    align-items:center;
+    padding:20px;
 }
+
+.project-title {
+    margin-top:0px;
+}
+
+.project-description {
+    width:100%;
+}
+
+.project-in-article-title {
+    margin-left:0px;
+    font-size: 22px;
+}
+
+.project-in-article-list {    
+    color: #aa58a2;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    margin-left:25px;
+    font-size: 14px;
+}
+
+/* ID's*/
+
+
+
+/*^ Project Pages Applicable Styles ^*/

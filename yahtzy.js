@@ -349,3 +349,85 @@ const calcChance = (arr) => {
   const points = arr.reduce((accumulator, currentValue) => accumulator + currentValue);
   return points
 }
+
+
+//________________________________________________________________________________________________________Test area: 
+
+let testArr = [3,3,3,3,3]
+
+ones = calcNumberedDice(testArr, 1)
+twos = calcNumberedDice(testArr, 2)
+threes = calcNumberedDice(testArr, 3)
+fours = calcNumberedDice(testArr, 4)
+fives = calcNumberedDice(testArr, 5)
+sixes = calcNumberedDice(testArr, 6)
+
+thirtyFiveBonus = calcThirtyFiveBonus
+
+threeOfAKind = calcThreeOfAKind(testArr)
+fourOfAKind = calcFourOfAKind(testArr)
+fullHouse = calcFullHouse(testArr)
+smallStraight = calcSmStraight(testArr)
+largeStraight = calcLgStraight(testArr)
+yahtzy = calcYahtzy(testArr)
+chance = calcChance(testArr)
+
+console.log('Ones: ' + ones )
+console.log('Twos: ' + twos)
+console.log('Threes: ' + threes)
+console.log('Fours: ' + fours)
+console.log('Fives: ' + fives)
+console.log('Sixes: ' + sixes)
+
+console.log('35 pt Bonus: ' + thirtyFiveBonus)
+
+console.log('3 of a Kind: ' + threeOfAKind)
+console.log('4 of a Kind: ' + fourOfAKind)
+console.log('Full House: ' + fullHouse)
+console.log('Small Straight: ' + smallStraight)
+console.log('Large Straight: ' + largeStraight)
+console.log('Yahtzy: ' + yahtzy)
+console.log('Chance: ' + chance)
+
+
+const animation = () => {
+    let y = Math.floor(Math.random()*6)
+    switch (y) {
+      case 0:
+        return("./Yahtzy Web Assets/one.svg")
+      case 1:
+        return("./Yahtzy Web Assets/two.svg")
+      case 2:
+        return("./Yahtzy Web Assets/three.svg")
+      case 3:
+        return("./Yahtzy Web Assets/four.svg")
+      case 4:
+        return("./Yahtzy Web Assets/five.svg")
+      case 5:
+        return("./Yahtzy Web Assets/six.svg")
+      default:
+        throw("animation switch case error")
+    };
+  };
+
+const animationRun = () => {
+  let x = 8;
+  const intervalId = setInterval(() => {
+    if (x <= 0) {
+      clearInterval(intervalId);
+    } else {
+      document.getElementById("yahtzy-one").src = animation();
+      document.getElementById("yahtzy-two").src = animation();
+      document.getElementById("yahtzy-three").src = animation();
+      document.getElementById("yahtzy-four").src = animation();
+      document.getElementById("yahtzy-five").src = animation();
+      x -= 1;
+      console.log(x);
+    }
+  }, 100);
+};
+
+document.getElementById("yahtzy-roll-button").addEventListener("click", animationRun);
+
+
+document.getElementById("yahtzy-roll-button").addEventListener("click", animationRun);
