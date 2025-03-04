@@ -5,7 +5,7 @@ const diceRoll = () => {
 
 //Roll A New Set of Dice
 const roll = () => {
-  let rollArr = [0,0,0,0,0,0]
+  let rollArr = [0,0,0,0,0]
 for (let i = 0; i < rollArr.length; i++){
   rollArr[i] = diceRoll()
 }
@@ -13,8 +13,8 @@ return rollArr;
 }
 
 //Initializing Array Variables
-let hold = []
-let diceArray = roll()
+let hold = [0,0,0,0,0]
+let diceArray = []
 
 //Merge Old and New Rolls into Final Roll
 let mergeRoll = (holdArray) => {
@@ -33,7 +33,7 @@ let mergeRoll = (holdArray) => {
       finalRoll.push(newDie[m])
     }
   }
-  return finalRoll;
+  diceArray = finalRoll;
 }
 
 //ScoreSheet
@@ -53,6 +53,12 @@ let smallStraight = 0
 let largeStraight = 0
 let yahtzy = 0
 let chance = 0
+
+const yahtzyOne = document.getElementById('yahtzy-one-div');
+const yahtzyTwo = document.getElementById('yahtzy-two-div');
+const yahtzyThree = document.getElementById('yahtzy-three-div');
+const yahtzyFour = document.getElementById('yahtzy-four-div');
+const yahtzyFive = document.getElementById('yahtzy-five-div');
 
 //35 Bonus only works if called with syntax same as others
 const calcThirtyFiveBonus = () => {
@@ -351,7 +357,222 @@ const calcChance = (arr) => {
 }
 
 
-//________________________________________________________________________________________________________Test area: 
+//_____________________________________Dice Roll Animation Functionality: 
+
+//This function not currently in use but Id like to have this function when I can figure out how to make it and imgSetter work together
+const animation = () => {
+    let y = Math.floor(Math.random()*6)
+    switch (y) {
+      case 0:
+        return("./Yahtzy Web Assets/one.svg")
+      case 1:
+        return("./Yahtzy Web Assets/two.svg")
+      case 2:
+        return("./Yahtzy Web Assets/three.svg")
+      case 3:
+        return("./Yahtzy Web Assets/four.svg")
+      case 4:
+        return("./Yahtzy Web Assets/five.svg")
+      case 5:
+        return("./Yahtzy Web Assets/six.svg")
+      default:
+        throw("animation switch case error")
+    };
+  };
+
+const setDiceImg = (elementID) => {
+    let i = 0
+    if (elementID == 'yahtzy-one') {
+        i = 0;
+    }
+    else if (elementID == 'yahtzy-two') {
+      i = 1;
+    }
+    else if (elementID == 'yahtzy-three') {
+      i = 2;
+    }
+    else if (elementID == 'yahtzy-four') {
+      i = 3;
+    }
+    else if (elementID == 'yahtzy-five') {
+      i = 4;
+    }
+    else {
+      throw('An error has occurred on setFinalImg if Else Statement')
+    }
+
+    switch(diceArray[i]) {
+      case 1:
+        //(elementID).src = "./Yahtzy Web Assets/one.svg";
+        document.getElementById(elementID).src = "./Yahtzy Web Assets/one.svg"
+        break;
+      case 2:
+        //(elementID).src = "./Yahtzy Web Assets/two.svg";
+        document.getElementById(elementID).src = "./Yahtzy Web Assets/two.svg"
+        break;
+      case 3: 
+        //(elementID).src = "./Yahtzy Web Assets/three.svg";
+        document.getElementById(elementID).src = "./Yahtzy Web Assets/three.svg"
+        break;
+      case 4:
+        //(elementID).src = "./Yahtzy Web Assets/four.svg";
+        document.getElementById(elementID).src = "./Yahtzy Web Assets/four.svg"
+        break;
+      case 5:
+        //(elementID).src = "./Yahtzy Web Assets/five.svg";
+        document.getElementById(elementID).src = "./Yahtzy Web Assets/five.svg"
+        break;
+      case 6:
+        //(elementID).src = "./Yahtzy Web Assets/six.svg";
+        document.getElementById(elementID).src = "./Yahtzy Web Assets/six.svg"
+        break;
+      default: 
+        throw('An error has occurred in setFinalImg function diceArray switch statement');
+      }
+};
+
+const imgSetter = () => {
+  mergeRoll(hold)
+  console.log('DiceRoll: ' + diceArray)
+
+  setDiceImg("yahtzy-one");
+  setDiceImg("yahtzy-two");
+  setDiceImg("yahtzy-three");
+  setDiceImg("yahtzy-four");
+  setDiceImg("yahtzy-five");
+}
+
+//This function not currently in use but Id like to have this function when I can figure out how to make it and imgSetter work together
+const animationRun = () => {
+  let x = 8;
+  const intervalId = setInterval(() => {
+    if (x <= 0) {
+      clearInterval(intervalId);
+    } else {
+      document.getElementById("yahtzy-one").src = animation();
+      document.getElementById("yahtzy-two").src = animation();
+      document.getElementById("yahtzy-three").src = animation();
+      document.getElementById("yahtzy-four").src = animation();
+      document.getElementById("yahtzy-five").src = animation();
+      x -= 1;
+    };
+  }, 100)
+};
+
+document.getElementById("yahtzy-roll-button").addEventListener("click", imgSetter);
+
+
+//Hold Dice Visual Functionality - Click the dice to hold or unhold and the color changes to show as much
+
+const holdVisualOne = () => {
+  if (diceArray.length) {
+    console.log('Hold start: ' + hold)
+    if (hold[0] == 0) {
+      hold[0] = 1
+      yahtzyOne.style.border = '5px solid #aa58a2';
+    }
+    else if (hold[0] == 1) {
+      hold[0] = 0
+      yahtzyOne.style.border = '5px solid black';
+    }
+    console.log('Hold after: ' + hold)
+  }
+  else {
+    console.log('You must roll before holding')
+  }
+};
+document.getElementById("yahtzy-one-div").addEventListener("click", holdVisualOne);
+
+const holdVisualTwo = () => {
+  if (diceArray.length) {
+    console.log('Hold start: ' + hold)
+    if (hold[1] == 0) {
+      hold[1] = 1
+      yahtzyTwo.style.border = '5px solid #aa58a2';
+    }
+    else if (hold[1] == 1) {
+      hold[1] = 0
+      yahtzyTwo.style.border = '5px solid black';
+    }
+    console.log('Hold after: ' + hold)
+  }
+  else {
+    console.log('You must roll before holding')
+  }
+};
+document.getElementById("yahtzy-two-div").addEventListener("click", holdVisualTwo);
+
+const holdVisualThree = () => {
+  if (diceArray.length) {
+    console.log('Hold start: ' + hold)
+    if (hold[2] == 0) {
+      hold[2] = 1
+      yahtzyThree.style.border = '5px solid #aa58a2';
+    }
+    else if (hold[2] == 1) {
+      hold[2] = 0
+      yahtzyThree.style.border = '5px solid black';
+    }
+    console.log('Hold after: ' + hold)
+  }
+else {
+  console.log('You must roll before holding')
+}
+};
+document.getElementById("yahtzy-three-div").addEventListener("click", holdVisualThree);
+
+const holdVisualFour = () => {
+  if (diceArray.length) {
+    console.log('Hold start: ' + hold)
+    if (hold[3] == 0) {
+      hold[3] = 1
+      yahtzyFour.style.border = '5px solid #aa58a2';
+    }
+    else if (hold[3] == 1) {
+      hold[3] = 0
+      yahtzyFour.style.border = '5px solid black';
+    }
+    console.log('Hold after: ' + hold)
+  }
+  else {
+    console.log('You must roll before holding')
+  }
+};
+document.getElementById("yahtzy-four-div").addEventListener("click", holdVisualFour);
+
+const holdVisualFive = () => {
+  if (diceArray.length) {
+    console.log('Hold start: ' + hold)
+    if (hold[4] == 0) {
+      hold[4] = 1
+      yahtzyFive.style.border = '5px solid #aa58a2';
+    }
+    else if (hold[4] == 1) {
+      hold[4] = 0
+      yahtzyFive.style.border = '5px solid black';
+    }
+    console.log('Hold after: ' + hold)
+  }
+  else {
+    console.log('You must roll before holding')
+  }
+  
+};
+document.getElementById("yahtzy-five-div").addEventListener("click", holdVisualFive);
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+//______________________________Scorecard Test area: 
 
 let testArr = [3,3,3,3,3]
 
@@ -388,46 +609,4 @@ console.log('Small Straight: ' + smallStraight)
 console.log('Large Straight: ' + largeStraight)
 console.log('Yahtzy: ' + yahtzy)
 console.log('Chance: ' + chance)
-
-
-const animation = () => {
-    let y = Math.floor(Math.random()*6)
-    switch (y) {
-      case 0:
-        return("./Yahtzy Web Assets/one.svg")
-      case 1:
-        return("./Yahtzy Web Assets/two.svg")
-      case 2:
-        return("./Yahtzy Web Assets/three.svg")
-      case 3:
-        return("./Yahtzy Web Assets/four.svg")
-      case 4:
-        return("./Yahtzy Web Assets/five.svg")
-      case 5:
-        return("./Yahtzy Web Assets/six.svg")
-      default:
-        throw("animation switch case error")
-    };
-  };
-
-const animationRun = () => {
-  let x = 8;
-  const intervalId = setInterval(() => {
-    if (x <= 0) {
-      clearInterval(intervalId);
-    } else {
-      document.getElementById("yahtzy-one").src = animation();
-      document.getElementById("yahtzy-two").src = animation();
-      document.getElementById("yahtzy-three").src = animation();
-      document.getElementById("yahtzy-four").src = animation();
-      document.getElementById("yahtzy-five").src = animation();
-      x -= 1;
-      console.log(x);
-    }
-  }, 100);
-};
-
-document.getElementById("yahtzy-roll-button").addEventListener("click", animationRun);
-
-
-document.getElementById("yahtzy-roll-button").addEventListener("click", animationRun);
+*/

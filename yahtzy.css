@@ -76,6 +76,42 @@ td {
     margin-top:20px;
     margin-left:30px;
     border-radius:10px;
+    /*border: black solid 5px;*/
+}
+
+#yahtzy-one-div {
+    border: black solid 5px;
+}
+#yahtzy-one-div:hover {
+    border: #f5eefe solid 5px;
+}
+
+#yahtzy-two-div {
+    border: black solid 5px;
+}
+#yahtzy-two-div:hover {
+    border: #f5eefe solid 5px;
+}
+
+#yahtzy-three-div {
+    border: black solid 5px;
+}
+#yahtzy-three-div:hover {
+    border: #f5eefe solid 5px;
+}
+
+#yahtzy-four-div {
+    border: black solid 5px;
+}
+#yahtzy-four-div:hover {
+    border: #f5eefe solid 5px;
+}
+
+#yahtzy-five-div {
+    border: black solid 5px;
+}
+#yahtzy-five-div:hover {
+    border: #f5eefe solid 5px;
 }
 
 #yahtzy-upper-section {
