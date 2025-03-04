@@ -16,7 +16,7 @@ return rollArr;
 let hold = [0,0,0,0,0]
 let diceArray = []
 
-//Merge Old and New Rolls into Final Roll
+//Merge Old and New Rolls into Final Roll - contains 'Old roll and 'new roll' console logs for testing
 let mergeRoll = (holdArray) => {
   let oldDie = diceArray
   let newDie = roll()
@@ -85,6 +85,38 @@ const calcNumberedDice = (arr, valueSearchingFor) => {
   return points;
 }
 
+const NumberDiceConversionOne = () => {
+  let points = calcNumberedDice(diceArray, 1)
+  document.getElementById("ones-td").innerHTML = points
+}
+const NumberDiceConversionTwo = () => {
+  let points = calcNumberedDice(diceArray, 2)
+  document.getElementById("twos-td").innerHTML = points
+}
+const NumberDiceConversionThree = () => {
+  let points = calcNumberedDice(diceArray, 3)
+  document.getElementById("threes-td").innerHTML = points
+}
+const NumberDiceConversionFour = () => {
+  let points = calcNumberedDice(diceArray, 4)
+  document.getElementById("fours-td").innerHTML = points
+}
+const NumberDiceConversionFive = () => {
+  let points = calcNumberedDice(diceArray, 5)
+  document.getElementById("fives-td").innerHTML = points
+}
+const NumberDiceConversionSix = () => {
+  let points = calcNumberedDice(diceArray, 6)
+  document.getElementById("sixes-td").innerHTML = points
+}
+
+document.getElementById("ones-td").addEventListener("click", NumberDiceConversionOne);
+document.getElementById("twos-td").addEventListener("click", NumberDiceConversionTwo);
+document.getElementById("threes-td").addEventListener("click", NumberDiceConversionThree);
+document.getElementById("fours-td").addEventListener("click", NumberDiceConversionFour);
+document.getElementById("fives-td").addEventListener("click", NumberDiceConversionFive);
+document.getElementById("sixes-td").addEventListener("click", NumberDiceConversionSix);
+
 // More Specialized Scoresheet Calculators
 
 const calcThreeOfAKind = (arr) => {
@@ -129,6 +161,12 @@ const calcThreeOfAKind = (arr) => {
   }
   return points;
 }
+const threeOfAKindConversion = () => {
+  points = calcThreeOfAKind(diceArray)
+  document.getElementById("three-of-a-kind-td").innerHTML = points
+}
+document.getElementById("three-of-a-kind-td").addEventListener("click", threeOfAKindConversion);
+
 
 const calcFourOfAKind = (arr) => {
   if (yahtzy == 50) {
@@ -172,6 +210,13 @@ const calcFourOfAKind = (arr) => {
   }
   return points;
 }
+
+const fourOfAKindConversion = () => {
+  points = calcFourOfAKind(diceArray)
+  document.getElementById("four-of-a-kind-td").innerHTML = points
+}
+document.getElementById("four-of-a-kind-td").addEventListener("click", fourOfAKindConversion);
+
 
 const calcFullHouse = (arr) => {
   if (yahtzy == 50) {
@@ -280,6 +325,12 @@ const calcFullHouse = (arr) => {
     }
   return points;
 }
+const fullHouseConversion = () => {
+  points = calcFullHouse(diceArray)
+  document.getElementById("full-house-td").innerHTML = points
+}
+document.getElementById("full-house-td").addEventListener("click", fullHouseConversion);
+
 
 const calcSmStraight = (arr) => {
   if (yahtzy == 50) {
@@ -306,6 +357,12 @@ const calcSmStraight = (arr) => {
   }
   return points;
 }
+const smStraightConversion = () => {
+  points = calcSmStraight(diceArray)
+  document.getElementById("small-straight-td").innerHTML = points
+}
+document.getElementById("small-straight-td").addEventListener("click", smStraightConversion);
+
 
 const calcLgStraight = (arr) => {
   if (yahtzy == 50) {
@@ -331,7 +388,14 @@ const calcLgStraight = (arr) => {
   }
   }
   return points;
+
 }
+const lgStraightConversion = () => {
+  points = calcLgStraight(diceArray)
+  document.getElementById("large-straight-td").innerHTML = points
+}
+document.getElementById("large-straight-td").addEventListener("click", lgStraightConversion);
+
 
 const calcYahtzy = (arr) => {
   const newSet = new Set();
@@ -347,6 +411,12 @@ const calcYahtzy = (arr) => {
     return 0;
   }
 }
+const yahtzyConversion = () => {
+  points = calcYahtzy(diceArray)
+  document.getElementById("five-of-a-kind-td").innerHTML = points
+}
+document.getElementById("five-of-a-kind-td").addEventListener("click", yahtzyConversion);
+
 
 const calcChance = (arr) => {
   if (yahtzy == 50) {
@@ -355,8 +425,14 @@ const calcChance = (arr) => {
   const points = arr.reduce((accumulator, currentValue) => accumulator + currentValue);
   return points
 }
+const chanceConversion = () => {
+  points = calcChance(diceArray)
+  document.getElementById("chance-td").innerHTML = points
+}
+document.getElementById("chance-td").addEventListener("click", chanceConversion);
 
 
+ 
 //_____________________________________Dice Roll Animation Functionality: 
 
 //This function not currently in use but Id like to have this function when I can figure out how to make it and imgSetter work together
@@ -433,7 +509,6 @@ const setDiceImg = (elementID) => {
 
 const imgSetter = () => {
   mergeRoll(hold)
-  console.log('DiceRoll: ' + diceArray)
 
   setDiceImg("yahtzy-one");
   setDiceImg("yahtzy-two");
@@ -466,16 +541,14 @@ document.getElementById("yahtzy-roll-button").addEventListener("click", imgSette
 
 const holdVisualOne = () => {
   if (diceArray.length) {
-    console.log('Hold start: ' + hold)
     if (hold[0] == 0) {
       hold[0] = 1
-      yahtzyOne.style.border = '5px solid #aa58a2';
+      yahtzyOne.style.border = '5px solid #5c1f58';
     }
     else if (hold[0] == 1) {
       hold[0] = 0
       yahtzyOne.style.border = '5px solid black';
     }
-    console.log('Hold after: ' + hold)
   }
   else {
     console.log('You must roll before holding')
@@ -485,16 +558,14 @@ document.getElementById("yahtzy-one-div").addEventListener("click", holdVisualOn
 
 const holdVisualTwo = () => {
   if (diceArray.length) {
-    console.log('Hold start: ' + hold)
     if (hold[1] == 0) {
       hold[1] = 1
-      yahtzyTwo.style.border = '5px solid #aa58a2';
+      yahtzyTwo.style.border = '5px solid #5c1f58';
     }
     else if (hold[1] == 1) {
       hold[1] = 0
       yahtzyTwo.style.border = '5px solid black';
     }
-    console.log('Hold after: ' + hold)
   }
   else {
     console.log('You must roll before holding')
@@ -504,16 +575,14 @@ document.getElementById("yahtzy-two-div").addEventListener("click", holdVisualTw
 
 const holdVisualThree = () => {
   if (diceArray.length) {
-    console.log('Hold start: ' + hold)
     if (hold[2] == 0) {
       hold[2] = 1
-      yahtzyThree.style.border = '5px solid #aa58a2';
+      yahtzyThree.style.border = '5px solid #5c1f58';
     }
     else if (hold[2] == 1) {
       hold[2] = 0
       yahtzyThree.style.border = '5px solid black';
     }
-    console.log('Hold after: ' + hold)
   }
 else {
   console.log('You must roll before holding')
@@ -523,16 +592,14 @@ document.getElementById("yahtzy-three-div").addEventListener("click", holdVisual
 
 const holdVisualFour = () => {
   if (diceArray.length) {
-    console.log('Hold start: ' + hold)
     if (hold[3] == 0) {
       hold[3] = 1
-      yahtzyFour.style.border = '5px solid #aa58a2';
+      yahtzyFour.style.border = '5px solid #5c1f58';
     }
     else if (hold[3] == 1) {
       hold[3] = 0
       yahtzyFour.style.border = '5px solid black';
     }
-    console.log('Hold after: ' + hold)
   }
   else {
     console.log('You must roll before holding')
@@ -542,16 +609,14 @@ document.getElementById("yahtzy-four-div").addEventListener("click", holdVisualF
 
 const holdVisualFive = () => {
   if (diceArray.length) {
-    console.log('Hold start: ' + hold)
     if (hold[4] == 0) {
       hold[4] = 1
-      yahtzyFive.style.border = '5px solid #aa58a2';
+      yahtzyFive.style.border = '5px solid #5c1f58';
     }
     else if (hold[4] == 1) {
       hold[4] = 0
       yahtzyFive.style.border = '5px solid black';
     }
-    console.log('Hold after: ' + hold)
   }
   else {
     console.log('You must roll before holding')
