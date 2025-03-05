@@ -60,6 +60,8 @@ const yahtzyThree = document.getElementById('yahtzy-three-div');
 const yahtzyFour = document.getElementById('yahtzy-four-div');
 const yahtzyFive = document.getElementById('yahtzy-five-div');
 
+const fiveOfAKind = document.getElementById('five-of-a-kind-td');
+
 //35 Bonus only works if called with syntax same as others
 const calcThirtyFiveBonus = () => {
   let test = (ones + twos + threes +fours + fives + sixes)
@@ -430,6 +432,124 @@ const chanceConversion = () => {
   document.getElementById("chance-td").innerHTML = points
 }
 document.getElementById("chance-td").addEventListener("click", chanceConversion);
+
+//Yahtzy Bonus Even Handler Functions
+const fiveOfAKindBonusOne = () => {
+  document.getElementById("ones-td").innerHTML = 100
+}
+const fiveOfAKindBonusTwo = () => {
+  document.getElementById("twos-td").innerHTML = 100
+}
+const fiveOfAKindBonusThree = () => {
+  document.getElementById("threes-td").innerHTML = 100
+}
+const fiveOfAKindBonusFour = () => {
+  document.getElementById("fours-td").innerHTML = 100
+}
+const fiveOfAKindBonusFive = () => {
+  document.getElementById("fives-td").innerHTML = 100
+}
+const fiveOfAKindBonusSix = () => {
+  document.getElementById("sixes-td").innerHTML = 100
+}
+const fiveOfAKindBonusThreeOfAKind = () => {
+  document.getElementById("three-of-a-kind-td").innerHTML = 100
+}
+const fiveOfAKindBonusFourOfAKind = () => {
+  document.getElementById("four-of-a-kind-td").innerHTML = 100
+}
+const fiveOfAKindBonusFullHouse = () => {
+  document.getElementById("full-house-td").innerHTML = 100
+}
+const fiveOfAKindBonusSmStraight = () => {
+  document.getElementById("small-straight-td").innerHTML = 100
+}
+const fiveOfAKindBonusLgStraight = () => {
+  document.getElementById("large-straight-td").innerHTML = 100
+}
+const fiveOfAKindBonusChance = () => {
+  document.getElementById("chance-td").innerHTML = 100
+}
+
+ 
+const calcFiveOfAKindBonus = () => {
+  if (fiveOfAKind.innerHTML == 50) {
+    console.log('Select an unfilled score to replace. Whatever score you select will equal 100pts');
+
+    // Remove previous event listeners
+    document.getElementById("ones-td").removeEventListener("click", NumberDiceConversionOne);
+    document.getElementById("twos-td").removeEventListener("click", NumberDiceConversionTwo);
+    document.getElementById("threes-td").removeEventListener("click", NumberDiceConversionThree);
+    document.getElementById("fours-td").removeEventListener("click", NumberDiceConversionFour);
+    document.getElementById("fives-td").removeEventListener("click", NumberDiceConversionFive);
+    document.getElementById("sixes-td").removeEventListener("click", NumberDiceConversionSix);
+
+    document.getElementById("three-of-a-kind-td").removeEventListener("click", threeOfAKindConversion);
+    document.getElementById("four-of-a-kind-td").removeEventListener("click", fourOfAKindConversion);
+    document.getElementById("full-house-td").removeEventListener("click", fullHouseConversion);
+    document.getElementById("small-straight-td").removeEventListener("click", smStraightConversion);
+    document.getElementById("large-straight-td").removeEventListener("click", lgStraightConversion);
+    document.getElementById("chance-td").removeEventListener("click", chanceConversion);
+
+
+    // Add event listeners for 100 point functions
+    document.getElementById("ones-td").addEventListener("mousedown", fiveOfAKindBonusOne);
+    document.getElementById("twos-td").addEventListener("mousedown", fiveOfAKindBonusTwo);
+    document.getElementById("threes-td").addEventListener("mousedown", fiveOfAKindBonusThree);
+    document.getElementById("fours-td").addEventListener("mousedown", fiveOfAKindBonusFour);
+    document.getElementById("fives-td").addEventListener("mousedown", fiveOfAKindBonusFive);
+    document.getElementById("sixes-td").addEventListener("mousedown", fiveOfAKindBonusSix);
+
+    document.getElementById("three-of-a-kind-td").addEventListener("mousedown", fiveOfAKindBonusThreeOfAKind);
+    document.getElementById("four-of-a-kind-td").addEventListener("mousedown", fiveOfAKindBonusFourOfAKind);
+    document.getElementById("full-house-td").addEventListener("mousedown", fiveOfAKindBonusFullHouse);
+    document.getElementById("small-straight-td").addEventListener("mousedown", fiveOfAKindBonusSmStraight);
+    document.getElementById("large-straight-td").addEventListener("mousedown", fiveOfAKindBonusLgStraight);
+    document.getElementById("chance-td").addEventListener("mousedown", fiveOfAKindBonusChance);
+
+    // Event listener for ending the function
+    document.addEventListener("mouseup", (event) => {
+      // Checks if the clicked element is one of the score elements then removes Bonus function event handlers and re-adds the normal score functions
+      if (event.target.id === "ones-td" || event.target.id === "twos-td" || event.target.id === "threes-td" || event.target.id === "fours-td" ||
+          event.target.id === "fives-td" || event.target.id === "sixes-td" || event.target.id === "three-of-a-kind-td" || event.target.id === "four-of-a-kind-td" ||
+          event.target.id === "full-house-td" || event.target.id === "small-straight-td" || event.target.id === "large-straight-td" || event.target.id === "chance-td") {
+
+        document.getElementById("ones-td").removeEventListener("mousedown", fiveOfAKindBonusOne);
+        document.getElementById("twos-td").removeEventListener("mousedown", fiveOfAKindBonusTwo);
+        document.getElementById("threes-td").removeEventListener("mousedown", fiveOfAKindBonusThree);
+        document.getElementById("fours-td").removeEventListener("mousedown", fiveOfAKindBonusFour);
+        document.getElementById("fives-td").removeEventListener("mousedown", fiveOfAKindBonusFive);
+        document.getElementById("sixes-td").removeEventListener("mousedown", fiveOfAKindBonusSix);
+
+        document.getElementById("three-of-a-kind-td").removeEventListener("mousedown", fiveOfAKindBonusThreeOfAKind);
+        document.getElementById("four-of-a-kind-td").removeEventListener("mousedown", fiveOfAKindBonusFourOfAKind);
+        document.getElementById("full-house-td").removeEventListener("mousedown", fiveOfAKindBonusFullHouse);
+        document.getElementById("small-straight-td").removeEventListener("mousedown", fiveOfAKindBonusSmStraight);
+        document.getElementById("large-straight-td").removeEventListener("mousedown", fiveOfAKindBonusLgStraight);
+        document.getElementById("chance-td").removeEventListener("mousedown", fiveOfAKindBonusChance);
+
+        //Add normal score calculators back to select buttons
+        document.getElementById("ones-td").addEventListener("click", NumberDiceConversionOne);
+        document.getElementById("twos-td").addEventListener("click", NumberDiceConversionTwo);
+        document.getElementById("threes-td").addEventListener("click", NumberDiceConversionThree);
+        document.getElementById("fours-td").addEventListener("click", NumberDiceConversionFour);
+        document.getElementById("fives-td").addEventListener("click", NumberDiceConversionFive);
+        document.getElementById("sixes-td").addEventListener("click", NumberDiceConversionSix);
+
+        document.getElementById("three-of-a-kind-td").addEventListener("click", threeOfAKindConversion);
+        document.getElementById("four-of-a-kind-td").addEventListener("click", fourOfAKindConversion);
+        document.getElementById("full-house-td").addEventListener("click", fullHouseConversion);
+        document.getElementById("small-straight-td").addEventListener("click", smStraightConversion);
+        document.getElementById("large-straight-td").addEventListener("click", lgStraightConversion);
+        document.getElementById("chance-td").addEventListener("click", chanceConversion);
+      };
+    });
+  }
+  else {console.log('Five of a kind must equal 50pts to use this Bonus')}
+};
+
+document.getElementById("bonus-td").addEventListener("click", calcFiveOfAKindBonus);
+
 
 
  
