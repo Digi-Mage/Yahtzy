@@ -547,7 +547,6 @@ const calcFiveOfAKindBonus = () => {
   }
   else {console.log('Five of a kind must equal 50pts to use this Bonus')}
 };
-
 document.getElementById("bonus-td").addEventListener("click", calcFiveOfAKindBonus);
 
 

@@ -11,6 +11,7 @@ th {
     border-style: solid;
     border-color: black;
     margin: 0;
+    height: 50px;
 }
 
 td {
@@ -69,6 +70,12 @@ td {
     border-color: black;
     margin: 0;
 }
+
+.score-td {
+    height:75px;
+    width:120px;
+}
+
 
 .yahtzy-dice {
     width:100px;
