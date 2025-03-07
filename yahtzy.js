@@ -15,6 +15,7 @@ return rollArr;
 //Initializing Array Variables
 let hold = [0,0,0,0,0]
 let diceArray = []
+let rollCount = 0
 
 //Merge Old and New Rolls into Final Roll - contains 'Old roll and 'new roll' console logs for testing
 let mergeRoll = (holdArray) => {
@@ -636,6 +637,20 @@ const imgSetter = () => {
   setDiceImg("yahtzy-five");
 }
 
+const rollFunctions = () => {
+  console.log('rollCount: ' + rollCount)
+  if (rollCount >= 0 && rollCount < 3) {
+    imgSetter();
+    rollCount+=1
+  }
+  else if (rollCount == 3) {
+    console.log('You cannot roll again, please select a score to set')
+  }
+  else {
+    throw('an error has occurred in rollFunctions')
+  }
+};
+
 //This function not currently in use but Id like to have this function when I can figure out how to make it and imgSetter work together
 const animationRun = () => {
   let x = 8;
@@ -653,7 +668,7 @@ const animationRun = () => {
   }, 100)
 };
 
-document.getElementById("yahtzy-roll-button").addEventListener("click", imgSetter);
+document.getElementById("yahtzy-roll-button").addEventListener("click", rollFunctions);
 
 
 //Hold Dice Visual Functionality - Click the dice to hold or unhold and the color changes to show as much
@@ -743,7 +758,6 @@ const holdVisualFive = () => {
   
 };
 document.getElementById("yahtzy-five-div").addEventListener("click", holdVisualFive);
-
 
 
 
