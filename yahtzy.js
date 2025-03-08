@@ -58,38 +58,50 @@ const calcThirtyFiveBonus = () => {
 
 // Can be used to calculate 1,2,3,4,5,6 on Sheet, Entered as calcNumberedDice([dice array], number on sheet)
 const calcNumberedDice = (arr, valueSearchingFor) => {
-  let points = 0
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === valueSearchingFor) {
-      points += valueSearchingFor
+  if (rollCount > 0) {
+    let points = 0
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] === valueSearchingFor) {
+        points += valueSearchingFor
+      }
     }
+    return points;
   }
-  return points;
-}
+  else {
+    overlay('You must roll the dice to set a score')
+  }
+};
+
 
 const NumberDiceConversionOne = () => {
   let points = calcNumberedDice(diceArray, 1)
   document.getElementById("ones-td").innerHTML = points
+  reset();
 }
 const NumberDiceConversionTwo = () => {
   let points = calcNumberedDice(diceArray, 2)
   document.getElementById("twos-td").innerHTML = points
+  reset();
 }
 const NumberDiceConversionThree = () => {
   let points = calcNumberedDice(diceArray, 3)
   document.getElementById("threes-td").innerHTML = points
+  reset();
 }
 const NumberDiceConversionFour = () => {
   let points = calcNumberedDice(diceArray, 4)
   document.getElementById("fours-td").innerHTML = points
+  reset();
 }
 const NumberDiceConversionFive = () => {
   let points = calcNumberedDice(diceArray, 5)
   document.getElementById("fives-td").innerHTML = points
+  reset();
 }
 const NumberDiceConversionSix = () => {
   let points = calcNumberedDice(diceArray, 6)
   document.getElementById("sixes-td").innerHTML = points
+  reset();
 }
 
 document.getElementById("ones-td").addEventListener("click", NumberDiceConversionOne);
@@ -102,99 +114,112 @@ document.getElementById("sixes-td").addEventListener("click", NumberDiceConversi
 // More Specialized Scoresheet Calculators
 
 const calcThreeOfAKind = (arr) => {
-  let ones = 0
-  let twos = 0
-  let threes = 0
-  let fours = 0
-  let fives = 0
-  let sixes = 0
-  for (i = 0; i < arr.length; i++) {
-    switch (arr[i]) {
-      case 1:
-        ones += 1;
-        break;
-      case 2:
-        twos += 1;
-        break;
-      case 3:
-        threes += 1;
-        break;
-      case 4:
-        fours += 1;
-        break;
-      case 5:
-        fives += 1;
-        break;
-      case 6:
-        sixes += 1;
-        break;
-      default: 
-        console.log('A Three of a Kind error has occurred')
+  if (rollCount > 0) {
+    let ones = 0
+    let twos = 0
+    let threes = 0
+    let fours = 0
+    let fives = 0
+    let sixes = 0
+    for (i = 0; i < arr.length; i++) {
+      switch (arr[i]) {
+        case 1:
+          ones += 1;
+          break;
+        case 2:
+          twos += 1;
+          break;
+        case 3:
+          threes += 1;
+          break;
+        case 4:
+          fours += 1;
+          break;
+        case 5:
+          fives += 1;
+          break;
+        case 6:
+          sixes += 1;
+          break;
+        default: 
+          console.log('A Three of a Kind error has occurred')
+      }
     }
-  }
-  if (ones >= 3||twos >= 3||threes >= 3||fours >= 3||fives >= 3||sixes >= 3) {
-    points = arr.reduce((accumulator, currentValue) => accumulator + currentValue);
+    if (ones >= 3||twos >= 3||threes >= 3||fours >= 3||fives >= 3||sixes >= 3) {
+      points = arr.reduce((accumulator, currentValue) => accumulator + currentValue);
+    }
+    else {
+      points = 0
+    }
+    return points;
   }
   else {
-    points = 0
+    overlay('You must roll the dice to set a score')
   }
-  return points;
 }
 const threeOfAKindConversion = () => {
   points = calcThreeOfAKind(diceArray)
   document.getElementById("three-of-a-kind-td").innerHTML = points
+  reset();
 }
 document.getElementById("three-of-a-kind-td").addEventListener("click", threeOfAKindConversion);
 
 
 const calcFourOfAKind = (arr) => {
-  let ones = 0
-  let twos = 0
-  let threes = 0
-  let fours = 0
-  let fives = 0
-  let sixes = 0
-  for (i = 0; i < arr.length; i++) {
-    switch (arr[i]) {
-      case 1:
-        ones += 1;
-        break;
-      case 2:
-        twos += 1;
-        break;
-      case 3:
-        threes += 1;
-        break;
-      case 4:
-        fours += 1;
-        break;
-      case 5:
-        fives += 1;
-        break;
-      case 6:
-        sixes += 1;
-        break;
-      default: 
-        throw('A Four of a Kind error has occurred')
+  if (rollCount > 0) {
+    let ones = 0
+    let twos = 0
+    let threes = 0
+    let fours = 0
+    let fives = 0
+    let sixes = 0
+    for (i = 0; i < arr.length; i++) {
+      switch (arr[i]) {
+        case 1:
+          ones += 1;
+          break;
+        case 2:
+          twos += 1;
+          break;
+        case 3:
+          threes += 1;
+          break;
+        case 4:
+          fours += 1;
+          break;
+        case 5:
+          fives += 1;
+          break;
+        case 6:
+          sixes += 1;
+          break;
+        default: 
+          throw('A Four of a Kind error has occurred')
+      }
     }
-  }
-  if (ones >= 4||twos >= 4||threes >= 4||fours >= 4||fives >= 4||sixes >= 4) {
-    points = arr.reduce((accumulator, currentValue) => accumulator + currentValue);
+    if (ones >= 4||twos >= 4||threes >= 4||fours >= 4||fives >= 4||sixes >= 4) {
+      points = arr.reduce((accumulator, currentValue) => accumulator + currentValue);
+    }
+    else {
+      points = 0
+    }
+    return points;
   }
   else {
-    points = 0
+    overlay('You must roll the dice to set a score')
   }
-  return points;
 }
 
 const fourOfAKindConversion = () => {
   points = calcFourOfAKind(diceArray)
   document.getElementById("four-of-a-kind-td").innerHTML = points
+  reset();
 }
 document.getElementById("four-of-a-kind-td").addEventListener("click", fourOfAKindConversion);
 
 
 const calcFullHouse = (arr) => {
+  if (rollCount > 0) {
     let points = 0
     let ones = 0
     let twos = 0
@@ -297,105 +322,133 @@ const calcFullHouse = (arr) => {
       points = 25;
     }
   return points;
+  }
+  else {
+    overlay('You must roll the dice to set a score')
+  }
 }
 const fullHouseConversion = () => {
   points = calcFullHouse(diceArray)
   document.getElementById("full-house-td").innerHTML = points
+  reset();
 }
 document.getElementById("full-house-td").addEventListener("click", fullHouseConversion);
 
 
 const calcSmStraight = (arr) => {
-  let points = 0
-  let temp = [...arr];
-  temp.sort()
-  const setOne = new Set();
+  if (rollCount > 0) {
+    let points = 0
+    let temp = [...arr];
+    temp.sort()
+    const setOne = new Set();
 
-  //Adding Values to sets to test for duplicate numbers, invalidates straight possibility if shorter than 4
-  
-  for (i = 0; i < temp.length; i++) {
-    setOne.add(temp[i]);
-  }
-
-  if (setOne.size >= 4) {
-      temp = Array.from(setOne)
-      tempStr = temp.toString()
-
-    if (tempStr.includes('1,2,3,4') || tempStr.includes('2,3,4,5') || tempStr.includes('3,4,5,6')) {
-      points = 30
+    //Adding Values to sets to test for duplicate numbers, invalidates straight possibility if shorter than 4
+    
+    for (i = 0; i < temp.length; i++) {
+      setOne.add(temp[i]);
     }
+
+    if (setOne.size >= 4) {
+        temp = Array.from(setOne)
+        tempStr = temp.toString()
+
+      if (tempStr.includes('1,2,3,4') || tempStr.includes('2,3,4,5') || tempStr.includes('3,4,5,6')) {
+        points = 30
+      }
+    }
+    return points;
   }
-  return points;
+  else {
+    overlay('You must roll the dice to set a score')
+  }
 }
 const smStraightConversion = () => {
   points = calcSmStraight(diceArray)
   document.getElementById("small-straight-td").innerHTML = points
+  reset();
 }
 document.getElementById("small-straight-td").addEventListener("click", smStraightConversion);
 
 
 const calcLgStraight = (arr) => {
-  let points = 0
-  let temp = [...arr];
-  temp.sort()
-  const setOne = new Set();
+  if (rollCount > 0) {
+    let points = 0
+    let temp = [...arr];
+    temp.sort()
+    const setOne = new Set();
 
-  //Adding Values to sets to test for duplicate numbers, invalidates straight possibility if shorter than 5
-  
-  for (i = 0; i < temp.length; i++) {
-    setOne.add(temp[i]);
-  }
+    //Adding Values to sets to test for duplicate numbers, invalidates straight possibility if shorter than 5
+    
+    for (i = 0; i < temp.length; i++) {
+      setOne.add(temp[i]);
+    }
 
-  if (setOne.size >= 5) {
-    temp = Array.from(setOne)
-    tempStr = temp.toString()
+    if (setOne.size >= 5) {
+      temp = Array.from(setOne)
+      tempStr = temp.toString()
 
-  if (tempStr.includes('1,2,3,4,5') || tempStr.includes('2,3,4,5,6')) {
-    points = 40
-  }
-  }
-  return points;
-
-}
+    if (tempStr.includes('1,2,3,4,5') || tempStr.includes('2,3,4,5,6')) {
+      points = 40
+    }
+    }
+    return points;
+    }
+    else {
+      overlay('You must roll the dice to set a score')
+    };
+};
 const lgStraightConversion = () => {
   points = calcLgStraight(diceArray)
   document.getElementById("large-straight-td").innerHTML = points
+  reset();
 }
 document.getElementById("large-straight-td").addEventListener("click", lgStraightConversion);
 
 
 const calcYahtzy = (arr) => {
-  const newSet = new Set();
+  if (rollCount > 0) {
+    const newSet = new Set();
 
-  for (const a of arr) {
-    newSet.add(arr[a]);
-  }
-  console.log(newSet)
-  if (newSet.size == 1) {
-    return 50;
+    for (const a of arr) {
+      newSet.add(arr[a]);
+    }
+    console.log(newSet)
+    if (newSet.size == 1) {
+      return 50;
+    }
+    else {
+      return 0;
+    }
   }
   else {
-    return 0;
+    overlay('You must roll the dice to set a score')
   }
 }
 const yahtzyConversion = () => {
   points = calcYahtzy(diceArray)
   document.getElementById("five-of-a-kind-td").innerHTML = points
+  reset();
 }
 document.getElementById("five-of-a-kind-td").addEventListener("click", yahtzyConversion);
 
 
 const calcChance = (arr) => {
-  const points = arr.reduce((accumulator, currentValue) => accumulator + currentValue);
-  return points
+  if (rollCount > 0) {
+    const points = arr.reduce((accumulator, currentValue) => accumulator + currentValue);
+    return points;
+  }
+  else {
+    overlay('You must roll the dice to set a score')
+  }
 }
 const chanceConversion = () => {
   points = calcChance(diceArray)
   document.getElementById("chance-td").innerHTML = points
+  reset();
 }
 document.getElementById("chance-td").addEventListener("click", chanceConversion);
 
-//Yahtzy Bonus Even Handler Functions
+//Yahtzy Bonus Event Handler Functions
 const fiveOfAKindBonusOne = () => {
   document.getElementById("ones-td").innerHTML = 100
 }
@@ -597,7 +650,7 @@ const imgSetter = () => {
   setDiceImg("yahtzy-four");
   setDiceImg("yahtzy-five");
 }
-
+//Roll limitations and other functionality
 const rollFunctions = () => {
   console.log('rollCount: ' + rollCount)
   if (rollCount >= 0 && rollCount < 3) {
@@ -611,6 +664,16 @@ const rollFunctions = () => {
     throw('an error has occurred in rollFunctions')
   }
 };
+
+const reset = () => {
+  rollCount = 0
+  hold = [1,1,1,1,1]
+  holdVisualOne()
+  holdVisualTwo()
+  holdVisualThree()
+  holdVisualFour()
+  holdVisualFive()
+}
 
 //This function not currently in use but Id like to have this function when I can figure out how to make it and imgSetter work together
 const animationRun = () => {
@@ -719,6 +782,7 @@ const holdVisualFive = () => {
   
 };
 document.getElementById("yahtzy-five-div").addEventListener("click", holdVisualFive);
+
 
 //Overlay Error Message functionality
 const hideOverlay = () => {
