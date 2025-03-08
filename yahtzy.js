@@ -37,24 +37,6 @@ let mergeRoll = (holdArray) => {
   diceArray = finalRoll;
 }
 
-//ScoreSheet
-
-let ones = 0
-let twos = 0
-let threes = 0
-let fours = 0
-let fives = 0
-let sixes = 0
-let thirtyFiveBonus = 0
-
-let threeOfAKind = 0
-let fourOfAKind = 0
-let fullHouse = 0
-let smallStraight = 0
-let largeStraight = 0
-let yahtzy = 0
-let chance = 0
-
 const yahtzyOne = document.getElementById('yahtzy-one-div');
 const yahtzyTwo = document.getElementById('yahtzy-two-div');
 const yahtzyThree = document.getElementById('yahtzy-three-div');
@@ -76,9 +58,6 @@ const calcThirtyFiveBonus = () => {
 
 // Can be used to calculate 1,2,3,4,5,6 on Sheet, Entered as calcNumberedDice([dice array], number on sheet)
 const calcNumberedDice = (arr, valueSearchingFor) => {
-  if (yahtzy == 50) {
-    return 100;
-  }
   let points = 0
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] === valueSearchingFor) {
@@ -123,9 +102,6 @@ document.getElementById("sixes-td").addEventListener("click", NumberDiceConversi
 // More Specialized Scoresheet Calculators
 
 const calcThreeOfAKind = (arr) => {
-  if (yahtzy == 50) {
-    return 100;
-  }
   let ones = 0
   let twos = 0
   let threes = 0
@@ -172,9 +148,6 @@ document.getElementById("three-of-a-kind-td").addEventListener("click", threeOfA
 
 
 const calcFourOfAKind = (arr) => {
-  if (yahtzy == 50) {
-    return 100;
-  }
   let ones = 0
   let twos = 0
   let threes = 0
@@ -202,7 +175,7 @@ const calcFourOfAKind = (arr) => {
         sixes += 1;
         break;
       default: 
-        console.log('A Four of a Kind error has occurred')
+        throw('A Four of a Kind error has occurred')
     }
   }
   if (ones >= 4||twos >= 4||threes >= 4||fours >= 4||fives >= 4||sixes >= 4) {
@@ -222,9 +195,6 @@ document.getElementById("four-of-a-kind-td").addEventListener("click", fourOfAKi
 
 
 const calcFullHouse = (arr) => {
-  if (yahtzy == 50) {
-    return 100;
-  }
     let points = 0
     let ones = 0
     let twos = 0
@@ -253,7 +223,7 @@ const calcFullHouse = (arr) => {
           sixes += 1;
           break;
         default: 
-          console.log('A Full House 3 of a kind error has occurred')
+          throw('A Full House 3 of a kind error has occurred')
       }
     }
     //Filters out the three of a kind to prep for second check
@@ -305,7 +275,7 @@ const calcFullHouse = (arr) => {
           sixes += 1;
           break;
         default: 
-          console.log('A Full House 2 of a kind error has occurred')
+          throw('A Full House 2 of a kind error has occurred')
       }
     }
     if (ones >=2) {
@@ -336,9 +306,6 @@ document.getElementById("full-house-td").addEventListener("click", fullHouseConv
 
 
 const calcSmStraight = (arr) => {
-  if (yahtzy == 50) {
-    return 100;
-  }
   let points = 0
   let temp = [...arr];
   temp.sort()
@@ -368,9 +335,6 @@ document.getElementById("small-straight-td").addEventListener("click", smStraigh
 
 
 const calcLgStraight = (arr) => {
-  if (yahtzy == 50) {
-    return 100;
-  }
   let points = 0
   let temp = [...arr];
   temp.sort()
@@ -422,9 +386,6 @@ document.getElementById("five-of-a-kind-td").addEventListener("click", yahtzyCon
 
 
 const calcChance = (arr) => {
-  if (yahtzy == 50) {
-    return 100;
-  }
   const points = arr.reduce((accumulator, currentValue) => accumulator + currentValue);
   return points
 }
@@ -475,7 +436,7 @@ const fiveOfAKindBonusChance = () => {
  
 const calcFiveOfAKindBonus = () => {
   if (fiveOfAKind.innerHTML == 50) {
-    console.log('Select an unfilled score to replace. Whatever score you select will equal 100pts');
+    overlay('Select an unfilled score to replace. Whatever score you select will equal 100pts');
 
     // Remove previous event listeners
     document.getElementById("ones-td").removeEventListener("click", NumberDiceConversionOne);
@@ -546,7 +507,7 @@ const calcFiveOfAKindBonus = () => {
       };
     });
   }
-  else {console.log('Five of a kind must equal 50pts to use this Bonus')}
+  else {overlay('Five of a kind must equal 50pts to use this Bonus')}
 };
 document.getElementById("bonus-td").addEventListener("click", calcFiveOfAKindBonus);
 
@@ -644,7 +605,7 @@ const rollFunctions = () => {
     rollCount+=1
   }
   else if (rollCount == 3) {
-    console.log('You cannot roll again, please select a score to set')
+    overlay('You cannot roll again, please select a score to set')
   }
   else {
     throw('an error has occurred in rollFunctions')
@@ -685,7 +646,7 @@ const holdVisualOne = () => {
     }
   }
   else {
-    console.log('You must roll before holding')
+    overlay('You must roll before holding')
   }
 };
 document.getElementById("yahtzy-one-div").addEventListener("click", holdVisualOne);
@@ -702,7 +663,7 @@ const holdVisualTwo = () => {
     }
   }
   else {
-    console.log('You must roll before holding')
+    overlay('You must roll before holding')
   }
 };
 document.getElementById("yahtzy-two-div").addEventListener("click", holdVisualTwo);
@@ -719,7 +680,7 @@ const holdVisualThree = () => {
     }
   }
 else {
-  console.log('You must roll before holding')
+  overlay('You must roll before holding')
 }
 };
 document.getElementById("yahtzy-three-div").addEventListener("click", holdVisualThree);
@@ -736,7 +697,7 @@ const holdVisualFour = () => {
     }
   }
   else {
-    console.log('You must roll before holding')
+    overlay('You must roll before holding')
   }
 };
 document.getElementById("yahtzy-four-div").addEventListener("click", holdVisualFour);
@@ -753,16 +714,25 @@ const holdVisualFive = () => {
     }
   }
   else {
-    console.log('You must roll before holding')
+    overlay('You must roll before holding')
   }
   
 };
 document.getElementById("yahtzy-five-div").addEventListener("click", holdVisualFive);
 
+//Overlay Error Message functionality
+const hideOverlay = () => {
+  document.getElementById("yahtzy-overlay").style.visibility = 'hidden';
+  document.getElementById("yahtzy-player-message").textContent = '';
+}
 
+const overlay = (str) => {
+  document.getElementById("yahtzy-overlay").style.visibility = 'visible';
+  document.getElementById("yahtzy-player-message").textContent = str
+  document.getElementById("yahtzy-clear-button").addEventListener("click", hideOverlay);
+}
 
-
-
+console.log()
 
 
 

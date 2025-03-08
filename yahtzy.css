@@ -87,6 +87,17 @@ td {
     border-radius:15px;
 }
 
+.yahtzy-player-comms {
+    color:black;
+    background-color: transparent;
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
 #yahtzy-one-div {
     border: black solid 7px;
 }
@@ -143,6 +154,33 @@ td {
     color:#f5eefe;
     background-color: #482158;
 }
+
+#yahtzy-overlay {
+    visibility: hidden;
+}
+
+#yahtzy-player-comms-background {
+    padding:100%;
+    background-color:#482158;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    opacity:95%;
+}
+
+#yahtzy-player-message {
+    background-color: transparent;
+    color:#f5eefe;
+}
+
+#yahtzy-clear-button {
+    border:transparent;
+    width:150px;
+}
+
+
 /*_)_)_)_)_)_)_)_)_)_)_)_)_)_)_)_)_)__)_)_)_)_)_)_)_)_)_)_)_)_)_)_)New Code*/
 
 
