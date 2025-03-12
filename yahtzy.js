@@ -37,24 +37,33 @@ let mergeRoll = (holdArray) => {
   diceArray = finalRoll;
 }
 
+//Dice
 const yahtzyOne = document.getElementById('yahtzy-one-div');
 const yahtzyTwo = document.getElementById('yahtzy-two-div');
 const yahtzyThree = document.getElementById('yahtzy-three-div');
 const yahtzyFour = document.getElementById('yahtzy-four-div');
 const yahtzyFive = document.getElementById('yahtzy-five-div');
 
-const fiveOfAKind = document.getElementById('five-of-a-kind-td');
+//const fiveOfAKind = document.getElementById('five-of-a-kind-td'); -----------------------------------------------------------------------remove if no bugs in yahtzys
 
-//35 Bonus only works if called with syntax same as others
-const calcThirtyFiveBonus = () => {
-  let test = (ones + twos + threes +fours + fives + sixes)
-  if (test >= 63) {
-    return 35;
-  }
-  else {
-    return 0
-  }
-}
+//Scorecard
+let ones = 0
+let twos = 0
+let threes = 0
+let fours = 0
+let fives = 0
+let sixes = 0
+let thirtyFiveBonus = 0
+let threeOfAKind = 0
+let fourOfAKind = 0
+let fullHouse = 0
+let smallStraight = 0
+let largeStraight = 0
+let fiveOfAKind = 0
+let chance = 0
+let fiveOfAKindBonus = 0
+let upperTotal = 0
+let lowerTotal = 0
 
 // Can be used to calculate 1,2,3,4,5,6 on Sheet, Entered as calcNumberedDice([dice array], number on sheet)
 const calcNumberedDice = (arr, valueSearchingFor) => {
@@ -76,31 +85,49 @@ const calcNumberedDice = (arr, valueSearchingFor) => {
 const NumberDiceConversionOne = () => {
   let points = calcNumberedDice(diceArray, 1)
   document.getElementById("ones-td").innerHTML = points
+  ones = points
+  calcThirtyFiveBonus();
+  updateTotals();
   reset();
 }
 const NumberDiceConversionTwo = () => {
   let points = calcNumberedDice(diceArray, 2)
   document.getElementById("twos-td").innerHTML = points
+  twos = points
+  calcThirtyFiveBonus();
+  updateTotals();
   reset();
 }
 const NumberDiceConversionThree = () => {
   let points = calcNumberedDice(diceArray, 3)
   document.getElementById("threes-td").innerHTML = points
+  threes = points
+  calcThirtyFiveBonus();
+  updateTotals();
   reset();
 }
 const NumberDiceConversionFour = () => {
   let points = calcNumberedDice(diceArray, 4)
   document.getElementById("fours-td").innerHTML = points
+  fours = points
+  calcThirtyFiveBonus();
+  updateTotals();
   reset();
 }
 const NumberDiceConversionFive = () => {
   let points = calcNumberedDice(diceArray, 5)
   document.getElementById("fives-td").innerHTML = points
+  fives = points
+  calcThirtyFiveBonus();
+  updateTotals();
   reset();
 }
 const NumberDiceConversionSix = () => {
   let points = calcNumberedDice(diceArray, 6)
   document.getElementById("sixes-td").innerHTML = points
+  sixes = points
+  calcThirtyFiveBonus();
+  updateTotals();
   reset();
 }
 
@@ -160,6 +187,8 @@ const calcThreeOfAKind = (arr) => {
 const threeOfAKindConversion = () => {
   points = calcThreeOfAKind(diceArray)
   document.getElementById("three-of-a-kind-td").innerHTML = points
+  threeOfAKind = points
+  updateTotals();
   reset();
 }
 document.getElementById("three-of-a-kind-td").addEventListener("click", threeOfAKindConversion);
@@ -213,6 +242,8 @@ const calcFourOfAKind = (arr) => {
 const fourOfAKindConversion = () => {
   points = calcFourOfAKind(diceArray)
   document.getElementById("four-of-a-kind-td").innerHTML = points
+  fourOfAKind = points
+  updateTotals();
   reset();
 }
 document.getElementById("four-of-a-kind-td").addEventListener("click", fourOfAKindConversion);
@@ -330,6 +361,8 @@ const calcFullHouse = (arr) => {
 const fullHouseConversion = () => {
   points = calcFullHouse(diceArray)
   document.getElementById("full-house-td").innerHTML = points
+  fullHouse = points
+  updateTotals();
   reset();
 }
 document.getElementById("full-house-td").addEventListener("click", fullHouseConversion);
@@ -365,6 +398,8 @@ const calcSmStraight = (arr) => {
 const smStraightConversion = () => {
   points = calcSmStraight(diceArray)
   document.getElementById("small-straight-td").innerHTML = points
+  smallStraight = points
+  updateTotals();
   reset();
 }
 document.getElementById("small-straight-td").addEventListener("click", smStraightConversion);
@@ -400,6 +435,8 @@ const calcLgStraight = (arr) => {
 const lgStraightConversion = () => {
   points = calcLgStraight(diceArray)
   document.getElementById("large-straight-td").innerHTML = points
+  largeStraight = points
+  updateTotals();
   reset();
 }
 document.getElementById("large-straight-td").addEventListener("click", lgStraightConversion);
@@ -427,6 +464,8 @@ const calcYahtzy = (arr) => {
 const yahtzyConversion = () => {
   points = calcYahtzy(diceArray)
   document.getElementById("five-of-a-kind-td").innerHTML = points
+  fiveOfAKind = points
+  updateTotals();
   reset();
 }
 document.getElementById("five-of-a-kind-td").addEventListener("click", yahtzyConversion);
@@ -444,6 +483,8 @@ const calcChance = (arr) => {
 const chanceConversion = () => {
   points = calcChance(diceArray)
   document.getElementById("chance-td").innerHTML = points
+  chance = points
+  updateTotals();
   reset();
 }
 document.getElementById("chance-td").addEventListener("click", chanceConversion);
@@ -557,6 +598,7 @@ const calcFiveOfAKindBonus = () => {
         document.getElementById("small-straight-td").addEventListener("click", smStraightConversion);
         document.getElementById("large-straight-td").addEventListener("click", lgStraightConversion);
         document.getElementById("chance-td").addEventListener("click", chanceConversion);
+        fiveOfAKindBonus = 100
       };
     });
   }
@@ -565,11 +607,10 @@ const calcFiveOfAKindBonus = () => {
 document.getElementById("bonus-td").addEventListener("click", calcFiveOfAKindBonus);
 
 
-
  
 //_____________________________________Dice Roll Animation Functionality: 
 
-//This function not currently in use but Id like to have this function when I can figure out how to make it and imgSetter work together
+//This function not currently in use but Im holding onto it until I test some alternative methods
 const animation = () => {
     let y = Math.floor(Math.random()*6)
     switch (y) {
@@ -589,6 +630,23 @@ const animation = () => {
         throw("animation switch case error")
     };
   };
+
+  //This function not currently in use but Im holding onto it until I test some alternative methods
+const animationRun = () => {
+  let x = 8;
+  const intervalId = setInterval(() => {
+    if (x <= 0) {
+      clearInterval(intervalId);
+    } else {
+      document.getElementById("yahtzy-one").src = animation();
+      document.getElementById("yahtzy-two").src = animation();
+      document.getElementById("yahtzy-three").src = animation();
+      document.getElementById("yahtzy-four").src = animation();
+      document.getElementById("yahtzy-five").src = animation();
+      x -= 1;
+    };
+  }, 100)
+};
 
 const setDiceImg = (elementID) => {
     let i = 0
@@ -674,23 +732,6 @@ const reset = () => {
   holdVisualFour()
   holdVisualFive()
 }
-
-//This function not currently in use but Id like to have this function when I can figure out how to make it and imgSetter work together
-const animationRun = () => {
-  let x = 8;
-  const intervalId = setInterval(() => {
-    if (x <= 0) {
-      clearInterval(intervalId);
-    } else {
-      document.getElementById("yahtzy-one").src = animation();
-      document.getElementById("yahtzy-two").src = animation();
-      document.getElementById("yahtzy-three").src = animation();
-      document.getElementById("yahtzy-four").src = animation();
-      document.getElementById("yahtzy-five").src = animation();
-      x -= 1;
-    };
-  }, 100)
-};
 
 document.getElementById("yahtzy-roll-button").addEventListener("click", rollFunctions);
 
@@ -796,7 +837,51 @@ const overlay = (str) => {
   document.getElementById("yahtzy-clear-button").addEventListener("click", hideOverlay);
 }
 
-console.log()
+
+//35 point Bonus calculation
+const calcThirtyFiveBonus = () => {
+  let sum = (ones+twos+threes+fours+fives+sixes)
+  if (sum >= 63) {
+    thirtyFiveBonus = 35
+    document.getElementById("35-point-td").innerHTML = 35
+  }
+}
+
+// Numeral Point Total Calculation
+const calcNumeralPointTotal = () => {
+  let sum = (ones + twos + threes + fours + fives + sixes)
+  document.getElementById("number-point-total-td").innerHTML = sum
+}
+
+//Upper Total Calculation
+const calcUpperPointTotal = () => {
+  let sum = (ones + twos + threes + fours + fives + sixes + thirtyFiveBonus)
+  document.getElementById("total-td").innerHTML = sum
+  document.getElementById("upper-section-td").innerHTML = sum
+  upperTotal = sum
+}
+
+//Lower total Calculation
+const calcLowerPointTotal = () => {
+  let sum = (threeOfAKind + fourOfAKind + fullHouse + smallStraight + largeStraight + fiveOfAKind + chance + fiveOfAKindBonus)
+  console.log("lowerSum" + sum)
+  document.getElementById("lower-section-td").innerHTML = sum
+  lowerTotal = sum
+}
+
+//Grand Total Calculation
+const calcGrandTotal = () => {
+  let sum = (upperTotal + lowerTotal)
+  document.getElementById("grand-total-td").innerHTML = sum
+}
+
+// Update Totals
+const updateTotals = () => {
+  calcNumeralPointTotal();
+  calcUpperPointTotal();
+  calcLowerPointTotal();
+  calcGrandTotal();
+}
 
 
 
